@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Udacity Todo Goals</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.min.js"></script>
   </head>
 
   <body>
@@ -149,18 +150,23 @@
       /**************
        * THE MAGNIFIC COMBINE REDUCERS !!!!! :D
        ***************/
-      function app(state = {}, action) {
-        return {
-          todos: todos(state.todos, action),
-          goals: goals(state.goals, action)
-        };
-      }
+      // function app(state = {}, action) {
+      //   return {
+      //     todos: todos(state.todos, action),
+      //     goals: goals(state.goals, action)
+      //   };
+      // }
 
       /**
        * THIS START ALL PROCESS, LET'S GO!
        */
 
-      const store = createStore(app);
+      const store = Redux.createStore(
+        Redux.combineReducers({
+          todos,
+          goals
+        })
+      );
 
       store.subscribe(() => {
         const { goals, todos } = store.getState();
